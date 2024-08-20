@@ -28,12 +28,12 @@ namespace WebApplication1.Service
 
         public async Task<double> GetAirportsDistanceAsync(string iataCode1, string iataCode2)
         {
-            var airoport1 = GetAirportAsync(iataCode1);
-            var airoport2 = GetAirportAsync(iataCode2);
+            var airoport1Task = GetAirportAsync(iataCode1);
+            var airoport2Task = GetAirportAsync(iataCode2);
 
             try
             {
-                await Task.WhenAll(airoport1, airoport2);
+                await Task.WhenAll(airoport1Task, airoport2Task);
             }
             catch (Exception ex)
             {
@@ -41,8 +41,8 @@ namespace WebApplication1.Service
                 throw; 
             }
 
-            var airport1 = airoport1.Result;
-            var airport2 = airoport2.Result;
+            var airport1 = airoport1Task.Result;
+            var airport2 = airoport2Task.Result;
 
             if (airport1 == null || airport2 == null)
             {

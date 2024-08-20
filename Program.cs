@@ -1,5 +1,7 @@
 using Microsoft.Extensions.Configuration;
+using Polly.Retry;
 using WebApplication1.Helpers;
+using WebApplication1.Interfaces;
 using WebApplication1.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
 
 builder.Services.AddHttpClient();
-builder.Services.AddScoped<AirportService>();
+builder.Services.AddScoped<IAirportService,AirportService>();
+builder.Services.AddSingleton<IRetryPolicyService, RetryPolicyService>();
+
 
 
 builder.Services.AddControllers();

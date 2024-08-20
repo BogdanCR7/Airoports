@@ -4,7 +4,6 @@ namespace WebApplication1.Helpers
 {
     public static class CoordinatesHelper
     {
-        private const double EarthRadiusMiles = 3959.0;
         public static double CalculateDistance(Location loc1, Location loc2)
         {
             const double EarthRadiusMiles = 3958.8;
